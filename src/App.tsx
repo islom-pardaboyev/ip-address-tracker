@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function App() {
   const [ipAddress, setIpAddress] = useState<string>("");
-  
+  console.log(ipAddress)
   return (
     <main className="min-h-screen">
       <header>
