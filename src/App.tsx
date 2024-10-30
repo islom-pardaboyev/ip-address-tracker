@@ -6,7 +6,6 @@ import axios from "axios";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-
 type FormValue = {
   ipAdress: string;
 };
@@ -27,10 +26,12 @@ function App() {
   console.log(ipData);
 
   const onSubmit: SubmitHandler<FormValue> = (data) => {
-    axios
-      .get(`https://ipinfo.io/${data.ipAdress}?token=3210df1714e5a8`)
-      .then((res) => setIpData(res.data))
-      .catch((err) => console.error(err));
+    if (data.ipAdress) {
+      axios
+        .get(`https://ipinfo.io/${data.ipAdress}?token=3210df1714e5a8`)
+        .then((res) => setIpData(res.data))
+        .catch((err) => console.error(err));
+    }
   };
 
   useEffect(() => {
@@ -48,7 +49,9 @@ function App() {
         doubleClickZoom: true,
       });
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(mapRef.current);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+        mapRef.current
+      );
     }
   }, []);
 
