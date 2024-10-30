@@ -91,7 +91,7 @@ function App() {
             </form>
           </div>
 
-          <div className="absolute right-0 scale-75 lg:scale-100 left-0 -bottom-14">
+          <div className="absolute top-1/2 lg:top-[70%] right-0 scale-75 lg:scale-100 left-0 ">
             <div className="bg-white max-w-[1110px] mx-auto shadow-[0px_50px_50px_-25px_rgba(0,0,0,0.1)] py-6 sm:py-[37px] px-6 sm:px-[32px] rounded-[15px]">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
                 <div className="text-center sm:text-left">
