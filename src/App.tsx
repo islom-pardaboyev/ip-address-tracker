@@ -92,7 +92,7 @@ function App() {
               className="w-full flex rounded-[15px] overflow-hidden"
             >
               <input
-                type="text"
+                type="number"
                 {...register("ipAdress")}
                 placeholder="Search for any IP address or domain"
                 className="outline-none py-[18px] px-6 flex-1 text-base sm:text-lg"
