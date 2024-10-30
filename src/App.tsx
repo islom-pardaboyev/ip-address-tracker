@@ -4,6 +4,8 @@ import BgHeader from "./assets/images/Combined Shape.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
 
 type FormValue = {
   ipAdress: string;
@@ -23,7 +25,7 @@ function App() {
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   console.log(ipData);
-  
+
   const onSubmit: SubmitHandler<FormValue> = (data) => {
     axios
       .get(`https://ipinfo.io/${data.ipAdress}?token=3210df1714e5a8`)
@@ -33,11 +35,20 @@ function App() {
 
   useEffect(() => {
     if (!mapRef.current) {
-      mapRef.current = L.map("map").setView([0, 0], 2);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      }).addTo(mapRef.current);
+      mapRef.current = L.map("map", {
+        center: [0, 0],
+        zoom: 2,
+        zoomControl: true,
+        attributionControl: false,
+        maxZoom: 18,
+        minZoom: 2,
+        scrollWheelZoom: true,
+        dragging: true,
+        boxZoom: true,
+        doubleClickZoom: true,
+      });
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(mapRef.current);
     }
   }, []);
 
