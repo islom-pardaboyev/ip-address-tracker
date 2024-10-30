@@ -23,6 +23,7 @@ function App() {
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   console.log(ipData);
+  
   const onSubmit: SubmitHandler<FormValue> = (data) => {
     axios
       .get(`https://ipinfo.io/${data.ipAdress}?token=3210df1714e5a8`)
@@ -70,8 +71,8 @@ function App() {
             alt="background pattern"
           />
 
-          <div className="absolute top-[10%] left-1/2 -translate-x-1/2 flex items-center gap-[31px] flex-col w-full max-w-xl px-6 md:px-4">
-            <h1 className="text-white font-medium lg:text-[32px] text-2xl tracking-[-0.29px] leading-[30px]">
+          <div className="absolute top-[10%] left-1/2 transform -translate-x-1/2 flex items-center gap-[31px] flex-col w-full max-w-xl px-6 md:px-4">
+            <h1 className="text-white font-medium text-2xl md:text-[32px] tracking-[-0.29px] leading-[30px]">
               IP Address Tracker
             </h1>
 
